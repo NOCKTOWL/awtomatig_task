@@ -1,0 +1,32 @@
+import prisma from "@/lib/prisma";
+import { NextResponse } from "next/server";
+
+export async function PATCH(request: Request, { params }: { params: { id: string } }) {
+    try {
+        const { id } = params;
+        const { status } = await request.json();
+        const task = await prisma.task.update({
+            where: { id },
+            data: { status  },
+        });
+        console.log("Updated task:", task);
+        return NextResponse.json(task);
+    } catch (error) {
+        console.error("Error updating task:", error);
+        return NextResponse.json({ error: "Failed to update task" }, { status: 500 });
+    }
+}
+
+export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+    try {
+        const { id } = params;
+        const task = await prisma.task.delete({
+            where: { id },
+        });
+        console.log("Deleted task:", task);
+        return NextResponse.json(task);
+    } catch (error) {
+        console.error("Error deleting task:", error);
+        return NextResponse.json({ error: "Failed to delete task" }, { status: 500 });
+    }
+}
