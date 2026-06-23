@@ -19,13 +19,16 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const { title, description } = await request.json();
+        if (!title || !description) {
+            return NextResponse.json({ error: "Title and description are required" }, { status: 400 });
+        }
         const task = await prisma.task.create({
             data: {
                 title,
                 description,
             },
         });
-        return NextResponse.json(task);
+        return NextResponse.json(task, { status: 201 });
     } catch (error) {
         console.error("Error creating task:", error);
         return NextResponse.json({ error: "Failed to create task" }, { status: 500 });

@@ -1,12 +1,12 @@
 "use client";
 
+import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { Task } from "@/types/task";
-import axios from "axios";
 
-import TaskForm from "../app/components/TaskForm";
-// import TaskList from "./components/TaskList";
+import TaskForm from "./components/TaskForm";
 
+// ICONS
 import { FaTrash } from "react-icons/fa6";
 
 export default function Home() {
@@ -38,10 +38,8 @@ export default function Home() {
 
   const handleStatusChange = async (id: string, status: string) => {
     try {
-      const response = await axios.patch(`/api/tasks/${id}`, { status });
-      if (response.status === 200) {
-        fetchTasks();
-      }
+      await axios.patch(`/api/tasks/${id}`, { status });
+      fetchTasks();
     } catch (error) {
       console.error("Error updating task:", error);
     }
@@ -49,14 +47,14 @@ export default function Home() {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await axios.delete(`/api/tasks/${id}`);
-      if (response.status === 200) {
-        fetchTasks();
-      }
+      await axios.delete(`/api/tasks/${id}`);
+      fetchTasks();
     } catch (error) {
       console.error("Error deleting task:", error);
     }
   };
+
+  const remainingTasks = tasks.filter((task) => task.status !== "DONE").length;
 
   return (
     <>
@@ -68,9 +66,7 @@ export default function Home() {
         <div className="w-full max-w-2xl mt-6 p-6">
           <div className="flex justify-between  dark:text-zinc-500 mb-4">
             <h2 className="text-2xl font-bold mb-4 text-zinc-600">Tasks</h2>
-            <h2 className="opacity-70 text-sm">
-              {tasks.filter((task) => task.status !== "DONE").length} tasks left
-            </h2>
+            <h2 className="opacity-70 text-sm">{remainingTasks} tasks left</h2>
           </div>
           {loading ? (
             <p>Loading tasks...</p>
@@ -93,7 +89,7 @@ export default function Home() {
                     <select
                       value={task.status}
                       onChange={(e) =>
-                        handleStatusChange(task.id.toString(), e.target.value)
+                        handleStatusChange(task.id, e.target.value)
                       }
                       className={`border border-[#d4c9a8] rounded-md bg-[#e0dcc4] dark:bg-zinc-900 text-xs p-1 md:text-sm md:p-2 outline-none ${task.status === "PENDING" ? "dark:border-red-500/20" : task.status === "IN_PROGRESS" ? "border-yellow-500/20" : "border-green-500/20"}`}
                     >
@@ -102,7 +98,7 @@ export default function Home() {
                       <option value="DONE">Done</option>
                     </select>
                     <button
-                      onClick={() => handleDelete(task.id.toString())}
+                      onClick={() => handleDelete(task.id)}
                       className="text-red-400  p-1 md:p-2 rounded cursor-pointer hover:bg-red-500 hover:text-zinc-200 transition duration-150"
                     >
                       <FaTrash />
@@ -112,7 +108,7 @@ export default function Home() {
               ))}
             </ul>
           ) : (
-            <p className="text-zinc-500">
+            <p className="text-zinc-500 text-sm md:text-base">
               No tasks found. Add a new task to get started!
             </p>
           )}

@@ -9,22 +9,18 @@ import { FaPlus } from "react-icons/fa6";
 const TaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [status, setStatus] = useState("PENDING");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const newTask = {
       title,
       description,
-      status,
     };
 
     try {
-      const response = await axios.post("/api/tasks", newTask);
-      console.log("Added task:", response.data);
+      await axios.post("/api/tasks", newTask);
       setTitle("");
       setDescription("");
-      setStatus("PENDING");
 
       onTaskAdded();
     } catch (error) {
