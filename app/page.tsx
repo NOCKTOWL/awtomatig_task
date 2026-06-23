@@ -79,7 +79,7 @@ export default function Home() {
               {tasks.map((task) => (
                 <li
                   key={task.id}
-                  className="mb-2 p-4 border border-[#d4c9a8] dark:border-zinc-700 rounded-xl flex justify-between"
+                  className="mb-2 p-4 border border-[#d4c9a8] dark:border-zinc-700 rounded-xl flex justify-between gap-4"
                 >
                   <div className="flex flex-col items-start justify-between">
                     <h3 className="text-sm md:text-xl font-semibold text-zinc-700 dark:text-zinc-200">
@@ -95,7 +95,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleStatusChange(task.id.toString(), e.target.value)
                       }
-                      className="border border-[#d4c9a8] dark:border-gray-700 rounded-md bg-[#e0dcc4] dark:bg-zinc-900 text-xs p-1 md:text-sm md:p-2"
+                      className={`border border-[#d4c9a8] rounded-md bg-[#e0dcc4] dark:bg-zinc-900 text-xs p-1 md:text-sm md:p-2 outline-none ${task.status === "PENDING" ? "dark:border-red-500/20" : task.status === "IN_PROGRESS" ? "border-yellow-500/20" : "border-green-500/20"}`}
                     >
                       <option value="PENDING">Pending</option>
                       <option value="IN_PROGRESS">In Progress</option>
