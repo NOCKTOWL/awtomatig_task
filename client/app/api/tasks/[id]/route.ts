@@ -9,7 +9,6 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
             where: { id },
             data: { status  },
         });
-        console.log("Updated task:", task);
         return NextResponse.json(task);
     } catch (error) {
         console.error("Error updating task:", error);
@@ -23,7 +22,6 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
         const task = await prisma.task.delete({
             where: { id },
         });
-        console.log("Deleted task:", task);
         return NextResponse.json(task);
     } catch (error) {
         console.error("Error deleting task:", error);

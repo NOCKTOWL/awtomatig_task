@@ -3,6 +3,9 @@
 import axios from "axios";
 import { useState } from "react";
 
+// ICONS
+import { FaPlus } from "react-icons/fa6";
+
 const TaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -30,41 +33,34 @@ const TaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-red-400 p-6 rounded shadow">
-      <div className="mb-4">
-        <label
-          htmlFor="title"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Title
-        </label>
+    <form
+      onSubmit={handleSubmit}
+      className="w-screen md:w-2xl px-6 py-2 rounded shadow flex justify-between items-start gap-4 md:gap-8"
+    >
+      <div className="flex-1 mb-4">
         <input
           type="text"
           id="title"
+          required
+          placeholder="Enter task title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="bg-zinc-800 mb-4 block w-full p-2 rounded-lg outline-none "
         />
-      </div>
-      <div className="mb-4">
-        <label
-          htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Description
-        </label>
         <textarea
           id="description"
+          required
+          placeholder="Enter task description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+          className="bg-zinc-800 mt-1 block w-full p-2 rounded-lg outline-none"
         />
       </div>
       <button
         type="submit"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-orange-600 hover:bg-orange-700 text-white font-bold p-3 rounded-lg cursor-pointer"
       >
-        Add Task
+        <FaPlus />
       </button>
     </form>
   );

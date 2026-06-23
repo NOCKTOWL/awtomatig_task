@@ -8,8 +8,7 @@ export async function GET() {
             orderBy: {
                 createdAt: "desc",
             },
-        });
-        console.log("Fetched tasks:", tasks);    
+        });   
         return NextResponse.json(tasks);
     } catch (error) {
         console.error("Error fetching tasks:", error);
@@ -26,7 +25,6 @@ export async function POST(request: Request) {
                 description,
             },
         });
-        console.log("Created task:", task);
         return NextResponse.json(task);
     } catch (error) {
         console.error("Error creating task:", error);
