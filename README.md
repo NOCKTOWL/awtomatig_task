@@ -1,36 +1,240 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Awtomatig Task Manager
+
+A simple full-stack Task Manager application built with **Next.js**, **Prisma ORM**, and **PostgreSQL**.
+
+This project was developed as part of the AWTOMATIG Full Stack Intern take-home assessment.
+
+---
+
+## Features
+
+- Create a new task
+- View all tasks
+- Update task status
+- Delete tasks
+- RESTful API using Next.js Route Handlers
+- PostgreSQL database using Prisma ORM
+- Responsive UI built with Tailwind CSS
+
+---
+
+## Tech Stack
+
+### Frontend
+
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+
+### Backend
+
+- Next.js API Routes
+- Prisma ORM
+
+### Database
+
+- PostgreSQL (Supabase)
+
+### Deployment
+
+- Vercel
+
+---
+
+## Project Structure
+
+```
+.
+├── app
+│   ├── api
+│   │   └── tasks
+│   ├── components
+│   ├── page.tsx
+│   └── layout.tsx
+│
+├── lib
+│   ├── prisma.ts
+│   └── generated
+│
+├── prisma
+│   └── schema.prisma
+│
+├── types
+│
+└── README.md
+```
+
+---
+
+## Database Schema
+
+```prisma
+model Task {
+  id          String   @id @default(cuid())
+  title       String   @db.VarChar(255)
+  description String   @db.Text
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Status {
+  PENDING
+  IN_PROGRESS
+  DONE
+}
+```
+
+---
+
+## API Endpoints
+
+### Get all tasks
+
+```
+GET /api/tasks
+```
+
+Returns every task ordered by creation date.
+
+---
+
+### Create task
+
+```
+POST /api/tasks
+```
+
+Example request:
+
+```json
+{
+  "title": "Complete assignment",
+  "description": "Finish the internship task",
+  "status": "PENDING"
+}
+```
+
+---
+
+### Update task status
+
+```
+PATCH /api/tasks/:id
+```
+
+Example:
+
+```json
+{
+  "status": "DONE"
+}
+```
+
+---
+
+### Delete task
+
+```
+DELETE /api/tasks/:id
+```
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Clone the repository
+
+```bash
+git clone https://github.com/NOCKTOWL/awtomatig_task.git
+```
+
+Navigate into the client application:
+
+```bash
+cd awtomatig_task
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## Environment Variables
+
+Create a `.env` file inside the `client` folder.
+
+```env
+DATABASE_URL="your_postgresql_connection_string"
+DIRECT_URL="your_postgresql_connection_string"
+```
+
+---
+
+## Prisma
+
+Generate Prisma Client
+
+```bash
+npx prisma generate
+```
+
+Push schema to the database
+
+```bash
+npx prisma db push
+```
+
+---
+
+## Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Run the production server
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm start
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application is designed to be deployed on **Vercel** with a PostgreSQL database.
+
+Required environment variable:
+
+```
+DATABASE_URL
+DIRECT_URL
+```
+
+---
+
+## Author
+
+**Mehedi Hasan Nabil**
+
+GitHub:
+https://github.com/NOCKTOWL
