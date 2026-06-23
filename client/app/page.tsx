@@ -61,13 +61,13 @@ export default function Home() {
   return (
     <>
       <div className="flex flex-col flex-1 items-center justify-center font-sans bg-[#ede8d0] dark:bg-[#0e0e0e]">
-        <h1 className="absolute top-0 text-zinc-800 dark:text-zinc-200 text-3xl font-bold p-4 text-center ">
+        <h1 className="absolute top-0 text-zinc-800 dark:text-zinc-400 text-3xl font-bold p-4 text-center ">
           Awtomatig Tasks
         </h1>
         <TaskForm onTaskAdded={fetchTasks} />
         <div className="w-full max-w-2xl mt-6 p-6">
-          <div className="flex justify-between text-zinc-500 mb-4">
-            <h2 className="text-2xl font-bold mb-4">Tasks</h2>
+          <div className="flex justify-between  dark:text-zinc-500 mb-4">
+            <h2 className="text-2xl font-bold mb-4 text-zinc-600">Tasks</h2>
             <h2 className="opacity-70 text-sm">
               {tasks.filter((task) => task.status !== "DONE").length} tasks left
             </h2>
@@ -79,10 +79,10 @@ export default function Home() {
               {tasks.map((task) => (
                 <li
                   key={task.id}
-                  className="mb-2 p-4 border border-zinc-700 rounded-xl flex justify-between"
+                  className="mb-2 p-4 border border-[#d4c9a8] dark:border-zinc-700 rounded-xl flex justify-between"
                 >
                   <div className="flex flex-col items-start justify-between">
-                    <h3 className="text-sm md:text-xl font-semibold">
+                    <h3 className="text-sm md:text-xl font-semibold text-zinc-700 dark:text-zinc-200">
                       {task.title}
                     </h3>
                     <p className="text-xs md:text-sm text-zinc-500">
@@ -95,7 +95,7 @@ export default function Home() {
                       onChange={(e) =>
                         handleStatusChange(task.id.toString(), e.target.value)
                       }
-                      className="border border-gray-700 rounded-md bg-zinc-900 text-xs p-1 md:text-sm md:p-2"
+                      className="border border-[#d4c9a8] dark:border-gray-700 rounded-md bg-[#e0dcc4] dark:bg-zinc-900 text-xs p-1 md:text-sm md:p-2"
                     >
                       <option value="PENDING">Pending</option>
                       <option value="IN_PROGRESS">In Progress</option>
@@ -103,7 +103,7 @@ export default function Home() {
                     </select>
                     <button
                       onClick={() => handleDelete(task.id.toString())}
-                      className="text-red-400  p-1 md:p-2 rounded cursor-pointer hover:bg-red-500 hover:text-white transition duration-150"
+                      className="text-red-400  p-1 md:p-2 rounded cursor-pointer hover:bg-red-500 hover:text-zinc-200 transition duration-150"
                     >
                       <FaTrash />
                     </button>

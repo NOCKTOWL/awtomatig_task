@@ -35,7 +35,7 @@ const TaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-screen md:w-2xl px-6 py-2 rounded shadow flex justify-between items-start gap-4 md:gap-8"
+      className="w-screen md:w-2xl px-6 py-2 flex justify-between items-start gap-4 md:gap-8"
     >
       <div className="flex-1 mb-4">
         <input
@@ -45,7 +45,7 @@ const TaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
           placeholder="Enter task title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="bg-zinc-800 mb-4 block w-full p-2 rounded-lg outline-none "
+          className="bg-[#e0dcc4] dark:bg-zinc-800 mb-4 block w-full p-2 rounded-lg outline-none "
         />
         <textarea
           id="description"
@@ -53,7 +53,7 @@ const TaskForm = ({ onTaskAdded }: { onTaskAdded: () => void }) => {
           placeholder="Enter task description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="bg-zinc-800 mt-1 block w-full p-2 rounded-lg outline-none"
+          className="bg-[#e0dcc4] dark:bg-zinc-800 mt-1 block w-full p-2 rounded-lg outline-none"
         />
       </div>
       <button
